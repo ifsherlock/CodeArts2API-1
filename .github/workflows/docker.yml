@@ -50,4 +50,6 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
-          cache-to: type=gha,mode=max
+          # 多架构 + gha 缓存导出偶发 "error writing layer blob: not_found"，
+          # 不导出缓存：构建略慢，但不会因为缓存写入失败而整体失败。
+          cache-to: ""
